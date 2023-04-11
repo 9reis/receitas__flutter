@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:receitas__flutter/models/category.dart';
 import 'package:receitas__flutter/screens/categories_meals_screen.dart';
+import 'package:receitas__flutter/utils/app_routes.dart';
 
 class CategoryItem extends StatelessWidget {
   const CategoryItem(this.category);
@@ -36,7 +37,7 @@ class CategoryItem extends StatelessWidget {
   }
 
   void _selectCategory(BuildContext context) {
-    Navigator.of(context).pushNamed('/categories-meals',
+    Navigator.of(context).pushNamed(AppRoutes.CATEGORIES_MEALS,
         // Argumentos que deseja passar para rota
         arguments: category);
   }
