@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:receitas__flutter/models/category.dart';
+import 'package:receitas__flutter/screens/categories_meals_screen.dart';
 
 class CategoryItem extends StatelessWidget {
   const CategoryItem(this.category);
@@ -10,22 +9,40 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(15),
-      child: Text(
-        category.title,
-        style: Theme.of(context).textTheme.titleSmall,
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            category.color.withOpacity(0.5),
-            category.color,
-          ],
+    return InkWell(
+      borderRadius: BorderRadius.circular(15),
+      //Cor do efeito ao clicar
+      splashColor: Theme.of(context).primaryColor,
+      child: Container(
+        padding: EdgeInsets.all(15),
+        child: Text(
+          category.title,
+          style: Theme.of(context).textTheme.titleSmall,
         ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              category.color.withOpacity(0.5),
+              category.color,
+            ],
+          ),
+        ),
+      ),
+      onTap: () => _selectCategory(context),
+    );
+  }
+
+  void _selectCategory(BuildContext context) {
+    // Faz o push - Coloca mais uma tela na pilha
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) {
+          //retorna a rota(componente)
+          return CategoriesMealsScreen();
+        },
       ),
     );
   }
