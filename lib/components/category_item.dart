@@ -41,7 +41,8 @@ class CategoryItem extends StatelessWidget {
       MaterialPageRoute(
         builder: (_) {
           //retorna a rota(componente)
-          return CategoriesMealsScreen();
+          // Com isso poderá acessar as informações dentro de cada categoria
+          return CategoriesMealsScreen(category);
         },
       ),
     );
