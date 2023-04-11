@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:receitas__flutter/screens/categories_meals_screen.dart';
 import 'package:receitas__flutter/screens/categories_screen.dart';
+import 'package:receitas__flutter/screens/meal_detail_screen.dart';
 import 'package:receitas__flutter/utils/app_routes.dart';
 
 void main() => runApp(MyApp());
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
           // Define o CategoriesScreen como rota inicial
           AppRoutes.HOME: (ctx) => CategoriesScreen(),
           AppRoutes.CATEGORIES_MEALS: (ctx) => CategoriesMealsScreen(),
+          AppRoutes.MEAL_DETAIL: (ctx) => MealDetailScreen(),
         });
   }
 }
