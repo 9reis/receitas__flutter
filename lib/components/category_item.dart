@@ -36,15 +36,8 @@ class CategoryItem extends StatelessWidget {
   }
 
   void _selectCategory(BuildContext context) {
-    // Faz o push - Coloca mais uma tela na pilha
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) {
-          //retorna a rota(componente)
-          // Com isso poderá acessar as informações dentro de cada categoria
-          return CategoriesMealsScreen(category);
-        },
-      ),
-    );
+    Navigator.of(context).pushNamed('/categories-meals',
+        // Argumentos que deseja passar para rota
+        arguments: category);
   }
 }
