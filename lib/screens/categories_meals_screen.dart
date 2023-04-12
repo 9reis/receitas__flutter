@@ -4,15 +4,20 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:receitas__flutter/components/meal_item.dart';
 import 'package:receitas__flutter/data/dummy_data.dart';
 import 'package:receitas__flutter/models/category.dart';
+import 'package:receitas__flutter/models/meal.dart';
 
 class CategoriesMealsScreen extends StatelessWidget {
+  final List<Meal> meals;
+
+  CategoriesMealsScreen(this.meals);
+
   @override
   Widget build(BuildContext context) {
     // Pega os dados das categorias através dos argumentos passados na rota
     final category = ModalRoute.of(context)!.settings.arguments as Category;
 
     // Percorre a lista de refeicoes e pega cada item
-    final categoryMeals = DUMMY_MEALS.where((meal) {
+    final categoryMeals = meals.where((meal) {
       // Pega cada refeição de acordo com a categoria
       // clicada na lista de categorias
       return meal.categories.contains(category.id);

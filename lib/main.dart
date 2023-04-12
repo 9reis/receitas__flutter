@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:receitas__flutter/data/dummy_data.dart';
+import 'package:receitas__flutter/models/meal.dart';
 import 'package:receitas__flutter/screens/categories_meals_screen.dart';
 import 'package:receitas__flutter/screens/categories_screen.dart';
 import 'package:receitas__flutter/screens/meal_detail_screen.dart';
@@ -8,7 +10,15 @@ import 'package:receitas__flutter/utils/app_routes.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  // Pega todas as comidas
+  List<Meal> _availableMeals = DUMMY_MEALS;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,7 +40,9 @@ class MyApp extends StatelessWidget {
       routes: {
         // Define o CategoriesScreen como rota inicial
         AppRoutes.HOME: (ctx) => TabsScreen(),
-        AppRoutes.CATEGORIES_MEALS: (ctx) => CategoriesMealsScreen(),
+        // Passa as refeições para o componente que exibe por categoria
+        AppRoutes.CATEGORIES_MEALS: (ctx) =>
+            CategoriesMealsScreen(_availableMeals),
         AppRoutes.MEAL_DETAIL: (ctx) => MealDetailScreen(),
         AppRoutes.SETTINGS: (ctx) => SettingsScreen(),
       },
