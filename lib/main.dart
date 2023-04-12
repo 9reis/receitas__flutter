@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:receitas__flutter/data/dummy_data.dart';
 import 'package:receitas__flutter/models/meal.dart';
+import 'package:receitas__flutter/models/settings.dart';
 import 'package:receitas__flutter/screens/categories_meals_screen.dart';
 import 'package:receitas__flutter/screens/categories_screen.dart';
 import 'package:receitas__flutter/screens/meal_detail_screen.dart';
@@ -44,8 +45,27 @@ class _MyAppState extends State<MyApp> {
         AppRoutes.CATEGORIES_MEALS: (ctx) =>
             CategoriesMealsScreen(_availableMeals),
         AppRoutes.MEAL_DETAIL: (ctx) => MealDetailScreen(),
-        AppRoutes.SETTINGS: (ctx) => SettingsScreen(),
+        AppRoutes.SETTINGS: (ctx) => SettingsScreen(_filterMeals),
       },
     );
+  }
+
+// Chamado sempre que mudar a configuração
+// FIltra as refeições
+  void _filterMeals(Settings settings) {
+    setState(() {
+      _availableMeals = DUMMY_MEALS.where((meal) {
+        final filterGlutten = settings.isGluttenFree && !meal.isGlutenFree;
+        final filterLactose = settings.isLactoseFree && !meal.isLactoseFree;
+        final filterVegan = settings.isVegan && !meal.isVegan;
+        final filterVegeterian = settings.isVegetarian && !meal.isVegetarian;
+        // Se não caiu em nenhum dos filtros, a comida deve ser exibida
+        return !filterGlutten &&
+            !filterLactose &&
+            !filterVegan &&
+            !filterVegeterian;
+        // Se algum dos filtros derem verdadeiro, a cumida não deve ser exibida
+      }).toList();
+    });
   }
 }
