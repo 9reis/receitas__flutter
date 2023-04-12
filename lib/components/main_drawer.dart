@@ -30,13 +30,15 @@ class MainDrawer extends StatelessWidget {
           _createIcon(
             Icons.restaurant,
             'Refeições',
-            () => Navigator.of(context).pushNamed(AppRoutes.HOME),
+            // Coloca um nova rota e substitui a tela anterior 
+            () => Navigator.of(context).pushReplacementNamed(AppRoutes.HOME),
           ),
           Divider(color: Colors.black38),
           _createIcon(
             Icons.settings,
             'Configurações',
-            () => Navigator.of(context).pushNamed(AppRoutes.SETTINGS),
+            () =>
+                Navigator.of(context).pushReplacementNamed(AppRoutes.SETTINGS),
           ),
           Divider(color: Colors.black38),
         ],
