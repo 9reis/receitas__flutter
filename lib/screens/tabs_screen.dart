@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:receitas__flutter/components/main_drawer.dart';
 import 'package:receitas__flutter/screens/categories_screen.dart';
 import 'package:receitas__flutter/screens/favorite_screen.dart';
 
@@ -24,6 +25,8 @@ class _TabsScreenState extends State<TabsScreen> {
         centerTitle: true,
         title: Text(_screens[_selectedScreenIndex]['title'] as String),
       ),
+      // Icone na appBar que abre um menu lateral
+      drawer: MainDrawer(),
       body: _screens[_selectedScreenIndex]['screen'] as Widget,
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.white,
