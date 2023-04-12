@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:receitas__flutter/utils/app_routes.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
@@ -26,16 +27,24 @@ class MainDrawer extends StatelessWidget {
             height: 20,
           ),
           //Criando cada item do Drawer
-          _createIcon(Icons.restaurant, 'Refeições'),
+          _createIcon(
+            Icons.restaurant,
+            'Refeições',
+            () => Navigator.of(context).pushNamed(AppRoutes.HOME),
+          ),
           Divider(color: Colors.black38),
-          _createIcon(Icons.settings, 'Configurações'),
+          _createIcon(
+            Icons.settings,
+            'Configurações',
+            () => Navigator.of(context).pushNamed(AppRoutes.SETTINGS),
+          ),
           Divider(color: Colors.black38),
         ],
       ),
     );
   }
 
-  Widget _createIcon(IconData icon, String label) {
+  Widget _createIcon(IconData icon, String label, Function() onTap) {
     return ListTile(
       leading: Icon(
         icon,
@@ -49,7 +58,7 @@ class MainDrawer extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
-      onTap: () {},
+      onTap: onTap,
     );
   }
 }
