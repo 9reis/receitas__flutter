@@ -63,6 +63,12 @@ class MealDetailScreen extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.star),
+          onPressed: () {
+            // É passado associado ao pop() o que deseja retornar
+            Navigator.of(context).pop(meal.title);
+          }),
     );
   }
 
