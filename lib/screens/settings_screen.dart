@@ -3,16 +3,23 @@ import 'package:receitas__flutter/components/main_drawer.dart';
 import 'package:receitas__flutter/models/settings.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen(this.onSettingsChanged);
+  const SettingsScreen(this.onSettingsChanged, this.settings);
 
   final Function(Settings) onSettingsChanged;
+  final Settings settings;
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  var settings = Settings();
+  Settings? settings;
+
+  @override
+  void initState() {
+    super.initState();
+    settings = widget.settings;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,26 +43,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 _createSwith(
                   'Sem Glutén',
                   'Só exibe refeições sem Glutén',
-                  settings.isGluttenFree,
-                  (value) => setState(() => settings.isGluttenFree = value),
+                  settings!.isGluttenFree,
+                  (value) => setState(() => settings!.isGluttenFree = value),
                 ),
                 _createSwith(
                   'Sem Lactose',
                   'Só exibe refeições sem Lactose',
-                  settings.isLactoseFree,
-                  (value) => setState(() => settings.isLactoseFree = value),
+                  settings!.isLactoseFree,
+                  (value) => setState(() => settings!.isLactoseFree = value),
                 ),
                 _createSwith(
                   'Vegana',
                   'Só exibe refeições Veganas',
-                  settings.isVegan,
-                  (value) => setState(() => settings.isVegan = value),
+                  settings!.isVegan,
+                  (value) => setState(() => settings!.isVegan = value),
                 ),
                 _createSwith(
                   'Vegetariana',
                   'Só exibe refeições Vegetarianas',
-                  settings.isVegetarian,
-                  (value) => setState(() => settings.isVegetarian = value),
+                  settings!.isVegetarian,
+                  (value) => setState(() => settings!.isVegetarian = value),
                 ),
               ],
             ),
@@ -77,7 +84,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         value: value,
         onChanged: (value) {
           onChanged(value);
-          widget.onSettingsChanged(settings);
+          widget.onSettingsChanged(settings!);
         });
   }
 }
