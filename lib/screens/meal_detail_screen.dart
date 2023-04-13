@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:receitas__flutter/models/meal.dart';
 
 class MealDetailScreen extends StatelessWidget {
-  const MealDetailScreen({super.key});
+  const MealDetailScreen(this.onToggleFavorite, this.isFavorite);
+
+  final Function(Meal) onToggleFavorite;
+  final bool Function(Meal) isFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -64,10 +67,10 @@ class MealDetailScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.star),
+          child: Icon(isFavorite(meal) ? Icons.star : Icons.star_border ),
           onPressed: () {
-            // É passado associado ao pop() o que deseja retornar
-            Navigator.of(context).pop(meal.title);
+            // Pega a comida da pagina selecionada Adiciona ou Remove da lista
+            onToggleFavorite(meal);
           }),
     );
   }

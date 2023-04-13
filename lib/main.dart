@@ -22,6 +22,8 @@ class _MyAppState extends State<MyApp> {
 
   // Pega todas as comidas
   List<Meal> _availableMeals = DUMMY_MEALS;
+  // Lista de favoritos
+  List<Meal> _favoriteMeals = [];
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +45,12 @@ class _MyAppState extends State<MyApp> {
       ),
       routes: {
         // Define o CategoriesScreen como rota inicial
-        AppRoutes.HOME: (ctx) => TabsScreen(),
+        AppRoutes.HOME: (ctx) => TabsScreen(_favoriteMeals),
         // Passa as refeições para o componente que exibe por categoria
         AppRoutes.CATEGORIES_MEALS: (ctx) =>
             CategoriesMealsScreen(_availableMeals),
-        AppRoutes.MEAL_DETAIL: (ctx) => MealDetailScreen(),
+        AppRoutes.MEAL_DETAIL: (ctx) =>
+            MealDetailScreen(_tootleFavorite, _isFavorite),
         AppRoutes.SETTINGS: (ctx) => SettingsScreen(_filterMeals, settings),
       },
     );
@@ -71,5 +74,20 @@ class _MyAppState extends State<MyApp> {
         // Se algum dos filtros derem verdadeiro, a cumida não deve ser exibida
       }).toList();
     });
+  }
+
+  void _tootleFavorite(Meal meal) {
+    setState(() {
+      // Se contem a comida
+      _favoriteMeals.contains(meal)
+          //remove
+          ? _favoriteMeals.remove(meal)
+          // se não contem, adiciona
+          : _favoriteMeals.add(meal);
+    });
+  }
+
+  bool _isFavorite(Meal meal) {
+    return _favoriteMeals.contains(meal);
   }
 }

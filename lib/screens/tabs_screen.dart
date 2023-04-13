@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:receitas__flutter/components/main_drawer.dart';
+import 'package:receitas__flutter/models/meal.dart';
 import 'package:receitas__flutter/screens/categories_screen.dart';
 import 'package:receitas__flutter/screens/favorite_screen.dart';
 
 class TabsScreen extends StatefulWidget {
-  const TabsScreen({super.key});
+  const TabsScreen(this.favoriteMeals);
+
+  final List<Meal> favoriteMeals;
 
   @override
   State<TabsScreen> createState() => _TabsScreenState();
@@ -13,21 +16,33 @@ class TabsScreen extends StatefulWidget {
 class _TabsScreenState extends State<TabsScreen> {
   int _selectedScreenIndex = 0;
 
-  final List<Map<String, Object>> _screens = [
-    {'title': 'Lista de Categorias', 'screen': CategoriesScreen()},
-    {'title': 'Meus Favoritos', 'screen': FavoriteScreen()},
-  ];
+  List<Map<String, Object>>? _screens;
+
+  @override
+  void initState() {
+    super.initState();
+    _screens = [
+      {
+        'title': 'Lista de Categorias',
+        'screen': CategoriesScreen(),
+      },
+      {
+        'title': 'Meus Favoritos',
+        'screen': FavoriteScreen(widget.favoriteMeals)
+      },
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(_screens[_selectedScreenIndex]['title'] as String),
+        title: Text(_screens![_selectedScreenIndex]['title'] as String),
       ),
       // Icone na appBar que abre um menu lateral
       drawer: MainDrawer(),
-      body: _screens[_selectedScreenIndex]['screen'] as Widget,
+      body: _screens![_selectedScreenIndex]['screen'] as Widget,
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.white,
         selectedItemColor: Theme.of(context).accentColor,
